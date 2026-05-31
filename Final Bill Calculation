@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Order</title>
+    <link rel="stylesheet" href="style.css">
+    body{
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#f2f2f2;
+  }
 
+  .card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 0 10px gray;
+  }
+
+  .quantity-box{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:20px 0;
+  }
+
+  .quantity-box button{
+    width:40px;
+    height:40px;
+    font-size:20px;
+  }
+
+  #qty{
+    font-size:22px;
+    font-weight:bold;
+  }
+
+  .order-btn{
+    padding:10px 20px;
+    cursor:pointer;
+  }
+</head>
+<body>
+
+<div class="card">
+    <h2>🍽️ Idly</h2>
+
+    <p>Price: ₹10 per Idly</p>
+
+    <div class="quantity-box">
+        <button onclick="decrease()">-</button>
+
+        <span id="qty">1</span>
+
+        <button onclick="increase()">+</button>
+    </div>
+
+    <h3>Total: ₹<span id="total">10</span></h3>
+
+    <button class="order-btn" onclick="placeOrder()">
+        Place Order
+    </button>
+
+    <p id="result"></p>
+
+</div>
+<script>
+        let quantity = 1;
+        let price = 10;
+
+        function updatePrice(){
+
+            document.getElementById("qty").innerText = quantity;
+
+            document.getElementById("total").innerText = quantity * price;
+        }
+        function increase(){
+
+            quantity++;
+
+            updatePrice();
+        }
+        function decrease(){
+
+            if(quantity > 1){
+
+                quantity--;
+
+                updatePrice();
+            }
+        }
+
+        function placeOrder(){
+
+            let total = quantity * price;
+            let gst = total *0.05;
+            let finalbill = total + gst;
+            document.getElementById("result").innerHTML =
+            `Order Placed!<br>
+            Idly Quantity: ${quantity}<br>
+            Item Total   : ₹${total}<br>
+            GST(5%)      : ₹${gst}<br>
+            --------------------------------  <br>
+            Total Amount : ₹${finalbill} <br>
+            --------------------------------`
+        }
+    </script>
+
+<script src="script.js"></script>
+</body>
+</html>
